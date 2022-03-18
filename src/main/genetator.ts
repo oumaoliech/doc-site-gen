@@ -90,6 +90,9 @@ export async function generateSite(context: ExtensionContext): Promise<void> {
     log('generating content ...');
     await processDirectory(Configuration.docsRootPath, Configuration.docsOutputDir);    
 
+    let faviconPath = Uri.file(path.resolve(Configuration.docsOutputDir, 'favicon.ico'));
+    await fs.copy(Uri.file(context.asAbsolutePath('icon.ico')), faviconPath, { overwrite: false });
+
     window.showInformationMessage(`Documentation Site Generated to: ${Configuration.docsOutputDir}`);
 }
 
