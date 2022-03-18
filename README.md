@@ -1,6 +1,6 @@
 # Doc Site Generator
 
-Generates a static documentation website from [asciidoctor (`.adoc`)](https://asciidoctor.org/) files
+Generates a static documentation website from [asciidoctor(`.adoc`)](https://asciidoctor.org/) files
 using [Asciidoctor.js](https://github.com/asciidoctor/asciidoctor.js) to convert `.adoc` files to html
 and [kroki](https://kroki.io) to geneerate images for embedded diagrams in any format supported by kroki
 
@@ -24,29 +24,27 @@ change this to point to your own or any other kroki installation. You should onl
 tested against a http target.
 
 ## Commands
-### Clean
+### Doc Site Generator: Clean
 Deletes all contents of the output directory
 
-### Generate Site
+### Doc Site Generator: Generate Site
 
-The `Doc Site Generator: Generate Site` command processes files from the documentation root directory
-into the output directory, converting any `.adoc` files to html. Any other resources e.g. html or images
-will be copied as they are to the output directory. This command always cleans the output directory
-before generating the site.
+Processes files from the documentation root directory into the output directory, converting 
+any `.adoc` files to html. Any other resources e.g. html or images will be copied as they are 
+to the output directory. This command always cleans the output directory before generating the site.
 <!-- \!\[feature X\]\(images/feature-x.png\) -->
 
-### Serve
-Launches a server that serves the generated site. This command always cleans the output diectory and 
-generates the site.
+### Doc Site Generator: Serve
+Launches a server that serves the generated site. This command always cleans the output diectory and generates the site.
 
-### Stop Server
+### Doc Site Generator: Stop Server
 Stops the server that serves the generated site if it's running
 
 
 ## Known Issues
-The extension has only been tested with the online kroki server (`kroki.io`). If specify a different
-kroki server url in the settings as described above, please note that the diagram fetching routine 
-uses https and has not been tested against a http target.
+The extension has only been tested with the online kroki server (`kroki.io`). If you specify a
+different kroki server url in the settings as described above, please note that the diagram 
+fetching routine uses https and has not been tested against a http target.
 
 ## Release Notes
 
