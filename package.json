@@ -3,6 +3,7 @@
   "displayName": "Doc Site Generator",
   "description": "Documentation Site Generator",
   "publisher": "Ouma Oliech",
+  "icon": "icon.ico",
   "repository": { 
     "url": "https://github.com/oumaoliech/doc-site-gen.git"
   },
