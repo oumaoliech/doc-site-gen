@@ -34,30 +34,32 @@ export async function register(registry) {
         'structurizr'
     ];
     
-    let diagramsDir = path.join(Configuration.docsOutputDir, 'diagrams/');
-    try {
-        await workspace.fs.stat(Uri.file(diagramsDir));
-    }
-    catch(e) {
-        await workspace.fs.createDirectory(Uri.file(diagramsDir));
-    }
-    
     if (typeof registry.register === 'function') {
-        registry.register(function () {
+        registry.register(function () {            
             for (const name of names) {
-                this.block(name, diagramBlock(diagramsDir));
+                this.block(name, diagramBlock());
                 // this.blockMacro(diagramBlockMacro(name, context))
             }
         });
     } else if (typeof registry.block === 'function') {
         for (const name of names) {
-            registry.block(name, diagramBlock(diagramsDir));
+            registry.block(name, diagramBlock());
             // registry.blockMacro(diagramBlockMacro(name, context))
         }
     }
 }
 
-function diagramBlock(diagramsDir: string) {
+function getDiagramsDir(): String {
+    let diagramsDir = 'diagrams';
+    let diagramsPath = path.join(Configuration.docsOutputDir, diagramsDir);
+    if (! nfs.existsSync(diagramsPath)) {
+        nfs.mkdirSync(diagramsPath, { recursive: true });
+    }
+    
+    return diagramsDir;
+}
+
+function diagramBlock() {
     return function () {
         const self = this;
         self.onContext(['listing', 'literal']);
@@ -67,7 +69,7 @@ function diagramBlock(diagramsDir: string) {
           const role = attrs.role;
           const diagramText = reader.$read();
           try {
-            return processKroki(this, parent, attrs, diagramType, diagramText, diagramsDir);
+            return processKroki(this, parent, attrs, diagramType, diagramText, getDiagramsDir());
           } catch (e) {
             warn(`Skipping ${diagramType} block. ${e.message}`);
             attrs.role = role ? `${role} kroki-error` : 'kroki-error';
@@ -77,7 +79,7 @@ function diagramBlock(diagramsDir: string) {
     };
 }
 
-const processKroki = (processor, parent, attrs, diagramType, diagramText, diagramDir/*, context, */) => {
+function processKroki(processor, parent, attrs, diagramType, diagramText, diagramDir/*, context, */) {
     const doc = parent.getDocument();
     
     const blockId = attrs.id;
@@ -117,8 +119,8 @@ const processKroki = (processor, parent, attrs, diagramType, diagramText, diagra
 
     // fetch diagram    
     let serverUrl = Configuration.krokiServerUrl;
-    const diagramName = `diag-${rusha.createHash().update(diagramType + attrs.target).digest('hex')}.${format}`;
-    let imageOutPath = path.join(diagramDir, diagramName);
+    const diagramName = `${diagramDir}/diag-${rusha.createHash().update(diagramType + attrs.target).digest('hex')}.${format}`;
+    let imageOutPath = path.join(Configuration.docsOutputDir, diagramName);
     const diagramStream = nfs.createWriteStream(imageOutPath);
 
     fetchDiagram(
@@ -140,7 +142,7 @@ const processKroki = (processor, parent, attrs, diagramType, diagramText, diagra
 };
 
 
-export function fetchDiagram(
+function fetchDiagram(
     host: string, 
     path: string, 
     requestData: any, 
