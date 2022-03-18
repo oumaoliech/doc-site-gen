@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <script defer="defer" src="scripts/doxite.min.js"></script>
+        <link href="styles/asciidoctor.css" rel="stylesheet">
+        <link href="styles/doxite.css" rel="stylesheet">        
+        <script type="text/javascript">   
+            window.onload = () => Doxite.renderMain();
+        </script>
+    </head>
+    <body>
+        <div class="top-bar row">
+            <div id="title" class="column">
+                <button class="menu-toggle button button-clear" onclick="Doxite.toggleSideNav()"></button>
+            </div>
+            <div id="top-right" class="column top-right"></div>
+        </div>
+        <div id="main" class="row">
+            <div id="content-pane" class="content-pane column column-80"></div>
+        </div>
+    </body>
+</html>
