@@ -3,6 +3,9 @@
   "displayName": "Doc Site Generator",
   "description": "Documentation Site Generator",
   "publisher": "Ouma Oliech",
+  "repository": { 
+    "url": "https://github.com/oumaoliech/doc-site-gen.git"
+  },
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.64.0"
