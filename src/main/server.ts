@@ -7,7 +7,7 @@ import { Configuration } from './config';
 import { log } from './output';
 
 const app = express();
-const port = 9700;
+var port = 9000;
 var server: Server;
 
 export async function serve(context: ExtensionContext): Promise<void> {
@@ -31,19 +31,19 @@ export async function serve(context: ExtensionContext): Promise<void> {
         });
     }
 
-    let serve = (port) => {
+    let serve = () => {
         server = app.listen(port, () => {
             log(`Serving '${siteAbsoluteDirectory}' at localhost:${port}`);
         });
     };
 
-    serve(port);
-    var retries = 0;
+    serve();
     server.on('error', (e: NodeJS.ErrnoException) => {
         if (e.code === 'EADDRINUSE') {
           setTimeout(() => {
             server.close();
-            serve(port + (retries++));
+            port++;
+            serve();
           }, 1000);
         }
     });
