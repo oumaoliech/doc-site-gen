@@ -23,6 +23,49 @@ change this to point to your own or any other kroki installation. You should onl
 `kroki.io` without the protocol i.e. https. The diagram fetching routine uses https and has not been 
 tested against a http target.
 
+## Configuration
+Create a configuration file named `docsite.config.json` in your documentation root directory. The
+file specifies the content to be displayed in the generated site. The format of the file is as follows:
+
+```json
+{
+    "title": "Documentation Site Title",
+    "downloads": [
+        {
+            "description": "Download 1 Description",
+            "target": "path/to/target1"
+        },
+        {
+            "description": "Download 2 Description",
+            "target": "path/to/target2"
+        }
+    ],
+    "contents": [
+        {
+            "caption": "Content 1",
+            "description": "Description 1",
+            "keyWords": ["key", "word", "key phrase"],
+            "path": "path/to/content1.adoc"
+        },
+        {
+            "caption": "Caption 2",
+            "description": "Description 2",
+            "keyWords": ["key", "word", "key phrase"],
+            "path": "path/to/content2.html"
+        },
+    ]
+}
+```
+
+If there are any files to attach to the generated site for download. Add them to the `downloads`
+array. The generated site will include a link that opens a downloads page that lists all the 
+download targets as downloadable links
+
+Each content added to the `contents` array will be displayed on the side navigation pane and 
+the caption, description and key words will be added to the search index. When the content page
+is displayed, a _See Also_ section will be displayed at the bottom with the top results returned by 
+a search using the caption, description and key words.
+
 ## Commands
 ### Doc Site Generator: Clean
 Deletes all contents of the output directory
