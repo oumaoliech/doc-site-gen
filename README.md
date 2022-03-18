@@ -52,6 +52,6 @@ uses https and has not been tested against a http target.
 
 ### 1.0.0
 
-Initial release of Doc Site Genrator
+Initial release of Doc Site Generator
 
 ----------------------------------------------
