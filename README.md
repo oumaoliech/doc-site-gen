@@ -1,8 +1,8 @@
 # Doc Site Generator
 
-Generates a static documentation website from https://asciidoctor.org/[asciidoctor(`.adoc`)] files
-using https://github.com/asciidoctor/asciidoctor.js[Asciidoctor.js] to convert `.adoc` files to html
-and https://kroki.io[kroki] to geneerate images for embedded diagrams in any format supported by kroki
+Generates a static documentation website from [asciidoctor (`.adoc`)](https://asciidoctor.org/) files
+using [Asciidoctor.js](https://github.com/asciidoctor/asciidoctor.js) to convert `.adoc` files to html
+and [kroki](https://kroki.io) to geneerate images for embedded diagrams in any format supported by kroki
 
 ## Requirements
 
